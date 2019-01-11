@@ -1,3 +1,8 @@
+// A scaffold tool that can be placed at the root on the express - api template and will let you
+// scaffold resources from the command line sorta like rails. (You can run
+// node scaffold generate << resource name >>
+// followed by as many
+// << fieldname >>:<< field type >>
 
 /*
 //What It Does//
