@@ -1,4 +1,79 @@
-[![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
+Run in Terminal:  npm run s
+Command	Effect
+npm run server	Starts a development server with nodemon that automatically refreshes when you change something.
+npm test	Runs automated tests.
+npm run debug-server	Starts the server in debug mode, which will print lots of extra info about what's happening inside the app.
+
+README
+
+USER STORIES:
+
+RIDER:
+A rider wants to know how many total miles of the trail.
+A rider wants to know the location of each trail.
+A rider wants to know how difficult the trail is.
+A rider wants to know what feature each trail has.
+A rider wants to know the elevation of their trail.
+
+USER:
+A user wants to be able to see pictures of the trails.
+A user wants to be able to see trails they have completed.
+A user wants to create an account, with user name and password.
+A user wants to update their password.
+A user wants to sign in and log out.
+A user wants to get all trails.
+A user wants to get only trails they have completed.
+A user wants to see information on all the trails listed.
+
+STRETCH GOALS:
+A rider wants to know how difficult the ride is.
+A rider wants to know what feature each ride has.
+A rider wants to know how many streets would have to crossed over during the ride.
+
+WIREFRAMES:
+
+A wireframe is a layout of a web page that demonstrates what interface elements will exist on key pages. It is a critical part of the interaction design process. ... Wireframes can also be used to create the global and secondary navigation to ensure the terminology and structure used for the site meets user expectations.
+
+Wireframes focus on:
+* To have a easy to use of program.
+* Create a appealing UI/UX design .
+* The range of functions available
+* The relative priorities of the information and functions
+* The rules for displaying certain kinds of information
+* The effect of different scenarios on the display.
+
+Entity Relationship Diagrams (ERD)
+
+An entity-relationship diagram (ERD) is a data modeling technique that graphically illustrates an information system's entities and the relationships between those entities. An ERD is a conceptual and representational model of data used to represent the entity framework infrastructure. ... Entities. Relationships
+* Identify the entities. The first step in making an ERD is to identify all of the entities you will use. ...
+* Identify relationships. Look at two entities, are they related? ...
+* Describe the relationship. How are the entities related? ...
+* Add attributes. ...
+* Complete the diagram.
+
+Catalog of Routes:
+Authentication
+Verb	URI Pattern	Controller#Action
+POST	/sign-up	users#signup
+POST	/sign-in	users#signin
+PATCH	/change-password/	users#changepw
+DELETE	/sign-out/	users#signout
+GET	/users/:id	users#show
+Trails
+Verb	URI Pattern	Controller#Action
+GET	/trails	Trails#index
+GET	/trails/:id	Trails#show
+CompletedTrails
+Verb	URI Pattern	Controller#Action
+POST	/completed_trails	CompletedTrails#create
+GET	/completed_trails	CompletedTrails#index
+GET	/completed_trails/:id	CompletedSummits#show
+PATCH	/completed_trails/:id	CompletedTrails#update
+DELETE	/completed_trails/:id	CompletedTrails#destroy
+
+
+
+<!-- [![General Assembly Logo](https://camo.githubusercontent.com/1a91b05b8f4d44b5bbfb83abac2b0996d8e26c92/687474703a2f2f692e696d6775722e636f6d2f6b6538555354712e706e67)](https://generalassemb.ly/education/web-development-immersive)
 
 # express-api-template
 
@@ -203,4 +278,4 @@ HTTP/1.1 204 No Content
 
 1.  All content is licensed under a CC­BY­NC­SA 4.0 license.
 1.  All software code is licensed under GNU GPLv3. For commercial use or
-    alternative licensing, please contact legal@ga.co.
+    alternative licensing, please contact legal@ga.co. -->
