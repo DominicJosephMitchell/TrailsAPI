@@ -1,3 +1,18 @@
+sudo update-rc.d -f postgresql remove
+and
+sudo vim /etc/postgresql/9.5/main/start.conf
+
+echo manual | sudo tee /etc/init/postgresql.override
+and
+
+sudo systemctl disable postgresql.service
+and
+
+sudo systemctl disable postgresql
+
+
+
+
 Run in Terminal:  npm run s
 Command	Effect
 npm run server	Starts a development server with nodemon that automatically refreshes when you change something.
