@@ -9,10 +9,10 @@ curl "${API}${URL_PATH}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
-    "bucketList": {
-      "title":"'"${TITLE}"'",
-      "subtitle":"'"${SUBTITLE}"'",
-      "description":"'"${DESCRIPTION}"'"
+    "trails": {
+      "trail":"'"${TRAIL}"'",
+      "town":"'"${TOWN}"'",
+      "state":"'"${STATE}"'"
     }
   }'
 
