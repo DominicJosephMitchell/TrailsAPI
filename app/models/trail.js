@@ -1,7 +1,7 @@
 const mongoose = require('mongoose')
 
 const trailSchema = new mongoose.Schema({
-    trail: {
+    path: {
         type: String,
         required: true
     },
