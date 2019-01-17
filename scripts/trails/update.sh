@@ -9,10 +9,11 @@ curl "${API}${URL_PATH}/${ID}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
-    "trails": {
+    "trail": {
       "trail":"'"${TRAIL}"'",
       "town":"'"${TOWN}"'",
       "state":"'"${STATE}"'"
+
     }
   }'
 

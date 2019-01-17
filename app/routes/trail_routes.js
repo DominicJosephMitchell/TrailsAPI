@@ -13,6 +13,27 @@ const requireToken = passport.authenticate('bearer', { session: false })
 
 const router = express.Router()
 
+router.post('/trails', requireToken, (req, res) => {
+    req.body.trail.owner = req.user.id
+
+    Trail.create(req.body.trail)
+        .then(trail => {
+            res.status(201).json({ trail: trail.toObject() })
+        })
+        .catch(err => handle(err, res))
+})
+
+router.delete('/trails/:id', requireToken, (req, res) => {
+    Trail.findById(req.params.id)
+        .then(handle404)
+        .then(trail => {
+            requireOwnership(req, trail)
+            trail.remove()
+        })
+        .then(() => res.sendStatus(204))
+        .catch(err => handle(err, res))
+})
+
 router.get('/trails', requireToken, (req, res) => {
   Trail.find({ owner: req.user.id })
     .then(trails => {
@@ -26,16 +47,6 @@ router.get('/trails/:id', requireToken, (req, res) => {
     Trail.findById(req.params.id)
     .then(handle404)
         .then(trail => res.status(200).json({ trail: trail.toObject() }))
-    .catch(err => handle(err, res))
-})
-
-router.post('/trails', requireToken, (req, res) => {
-    req.body.trail.owner = req.user.id
-
-    Trail.create(req.body.trail)
-        .then(trail => {
-            res.status(201).json({ trail: trail.toObject() })
-    })
     .catch(err => handle(err, res))
 })
 
@@ -54,17 +65,6 @@ router.patch('/trails/:id', requireToken, (req, res) => {
       })
 
             return trail.update(req.body.trail)
-    })
-    .then(() => res.sendStatus(204))
-    .catch(err => handle(err, res))
-})
-
-router.delete('/trails/:id', requireToken, (req, res) => {
-    Trail.findById(req.params.id)
-    .then(handle404)
-        .then(trail => {
-            requireOwnership(req, trail)
-            trail.remove()
     })
     .then(() => res.sendStatus(204))
     .catch(err => handle(err, res))
