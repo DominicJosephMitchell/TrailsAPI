@@ -1,7 +1,7 @@
 'use strict'
 
 // creating a base name for the mongodb
-const mongooseBaseName = 'obscure-brook-97374'
+const mongooseBaseName = 'trails-api'
 
 // create the mongodb uri for development and test
 const database = {
