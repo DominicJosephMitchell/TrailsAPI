@@ -35,39 +35,39 @@ router.delete('/trails/:id', requireToken, (req, res) => {
 })
 
 router.get('/trails', requireToken, (req, res) => {
-  Trail.find({ owner: req.user.id })
-    .then(trails => {
-        return trails.map(trail => trail.toObject())
-    })
-      .then(trails => res.status(200).json({ trails: trails }))
-    .catch(err => handle(err, res))
+    Trail.find({ owner: req.user.id })
+        .then(trails => {
+            return trails.map(trail => trail.toObject())
+        })
+        .then(trails => res.status(200).json({ trails: trails }))
+        .catch(err => handle(err, res))
 })
 
 router.get('/trails/:id', requireToken, (req, res) => {
     Trail.findById(req.params.id)
-    .then(handle404)
+        .then(handle404)
         .then(trail => res.status(200).json({ trail: trail.toObject() }))
-    .catch(err => handle(err, res))
+        .catch(err => handle(err, res))
 })
 
 router.patch('/trails/:id', requireToken, (req, res) => {
     delete req.body.trail.owner
 
     Trail.findById(req.params.id)
-    .then(handle404)
+        .then(handle404)
         .then(trail => {
             requireOwnership(req, trail)
 
             Object.keys(req.body.trail).forEach(key => {
                 if (req.body.trail[key] === '') {
                     delete req.body.trail[key]
-        }
-      })
+                }
+            })
 
             return trail.update(req.body.trail)
-    })
-    .then(() => res.sendStatus(204))
-    .catch(err => handle(err, res))
+        })
+        .then(trail => res.sendStatus(204).json({ trail: trail.toObject() }))
+        .catch(err => handle(err, res))
 })
 
 module.exports = router
