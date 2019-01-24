@@ -52,7 +52,6 @@ router.get('/trails/:id', requireToken, (req, res) => {
 
 router.patch('/trails/:id', requireToken, (req, res) => {
     delete req.body.trail.owner
-
     Trail.findById(req.params.id)
         .then(handle404)
         .then(trail => {
@@ -66,7 +65,7 @@ router.patch('/trails/:id', requireToken, (req, res) => {
 
             return trail.update(req.body.trail)
         })
-        .then(trail => res.sendStatus(204).json({ trail: trail.toObject() }))
+        .then(trail => res.sendStatus(204))
         .catch(err => handle(err, res))
 })
 
