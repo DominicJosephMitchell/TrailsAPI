@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const trailSchema = new mongoose.Schema({
+const nurseSchema = new mongoose.Schema({
     path: {
         type: String,
         required: true
@@ -23,4 +23,4 @@ const trailSchema = new mongoose.Schema({
         timestamps: true
     })
 
-module.exports = mongoose.model('Trail', trailSchema)
+module.exports = mongoose.model('Nurse', nurseSchema)

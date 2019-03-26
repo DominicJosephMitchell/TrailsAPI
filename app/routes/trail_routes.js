@@ -1,7 +1,7 @@
 const express = require('express')
 const passport = require('passport')
 
-const Trail = require('../models/trail')
+const Nurse = require('../models/nurse')
 
 const handle = require('../../lib/error_handler')
 const customErrors = require('../../lib/custom_errors')
@@ -13,59 +13,59 @@ const requireToken = passport.authenticate('bearer', { session: false })
 
 const router = express.Router()
 
-router.post('/trails', requireToken, (req, res) => {
+router.post('/nurse', requireToken, (req, res) => {
     req.body.trail.owner = req.user.id
 
-    Trail.create(req.body.trail)
+    Nurse.create(req.body.trail)
         .then(trail => {
-            res.status(201).json({ trail: trail.toObject() })
+            res.status(201).json({ nurse: nurse.toObject() })
         })
         .catch(err => handle(err, res))
 })
 
-router.delete('/trails/:id', requireToken, (req, res) => {
-    Trail.findById(req.params.id)
+router.delete('/nurse/:id', requireToken, (req, res) => {
+    Nurse.findById(req.params.id)
         .then(handle404)
-        .then(trail => {
-            requireOwnership(req, trail)
-            trail.remove()
+        .then(nurse => {
+            requireOwnership(req, nurse)
+            nurse.remove()
         })
         .then(() => res.sendStatus(204))
         .catch(err => handle(err, res))
 })
 
-router.get('/trails', requireToken, (req, res) => {
-    Trail.find({ owner: req.user.id })
-        .then(trails => {
-            return trails.map(trail => trail.toObject())
+router.get('/nurse', requireToken, (req, res) => {
+    Nurse.find({ owner: req.user.id })
+        .then(nurse => {
+            return nurse.map(nurse => nurse.toObject())
         })
-        .then(trails => res.status(200).json({ trails: trails }))
+        .then(nurse => res.status(200).json({ nurse: nurse }))
         .catch(err => handle(err, res))
 })
 
-router.get('/trails/:id', requireToken, (req, res) => {
-    Trail.findById(req.params.id)
+router.get('/nurse/:id', requireToken, (req, res) => {
+    Nurse.findById(req.params.id)
         .then(handle404)
-        .then(trail => res.status(200).json({ trail: trail.toObject() }))
+        .then(nurse => res.status(200).json({ nurse: nurse.toObject() }))
         .catch(err => handle(err, res))
 })
 
-router.patch('/trails/:id', requireToken, (req, res) => {
-    delete req.body.trail.owner
-    Trail.findById(req.params.id)
+router.patch('/nurse/:id', requireToken, (req, res) => {
+    delete req.body.nurse.owner
+    Nurse.findById(req.params.id)
         .then(handle404)
-        .then(trail => {
-            requireOwnership(req, trail)
+        .then(nurse => {
+            requireOwnership(req, nurse)
 
-            Object.keys(req.body.trail).forEach(key => {
-                if (req.body.trail[key] === '') {
-                    delete req.body.trail[key]
+            Object.keys(req.body.nurse).forEach(key => {
+                if (req.body.nurse[key] === '') {
+                    delete req.body.nurse[key]
                 }
             })
 
-            return trail.update(req.body.trail)
+            return nurse.update(req.body.nurse)
         })
-        .then(trail => res.sendStatus(204))
+        .then(nurse => res.sendStatus(204))
         .catch(err => handle(err, res))
 })
 

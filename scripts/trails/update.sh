@@ -1,7 +1,7 @@
 #!/bin/bash
 
 API="http://localhost:4741"
-URL_PATH="/trails"
+URL_PATH="/nurse"
 
 curl "${API}${URL_PATH}/${ID}" \
   --include \
@@ -9,8 +9,8 @@ curl "${API}${URL_PATH}/${ID}" \
   --header "Content-Type: application/json" \
   --header "Authorization: Bearer ${TOKEN}" \
   --data '{
-    "trail": {
-      "trail":"'"${TRAIL}"'",
+    "nurse": {
+      "nurse":"'"${nurse}"'",
       "town":"'"${TOWN}"'",
       "state":"'"${STATE}"'"
 

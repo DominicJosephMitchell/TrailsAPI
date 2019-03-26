@@ -1,7 +1,7 @@
 #!/bin/sh
 
 API="http://localhost:4741"
-URL_PATH="/trails"
+URL_PATH="/nurse"
 
 curl "${API}${URL_PATH}" \
   --include \
